@@ -15,11 +15,19 @@ export class course extends Component {
             this.setState({ courses: response.data.data });
         })
     }
+    navigateSubjectPage(e, courseId){
+      console.log(courseId);
+        window.location = `/${courseId}`
+        
+    }
+    // navigateSubjectPage(e, courseId){
+    //   window.location = `/${courseId}`
+    // }
     render() {
         return (
             <div className="container">
             <h1>Courses</h1>
-            {this.state.courses.length > 0 && this.state.courses.map((item, index) => (
+            {this.state.courses.length >= 0 && this.state.courses.map((item, index) => (
               <div key={index} className="card mb-3">
                 <div className="p-3" onClick={e => this.navigateSubjectPage(e, item._id)}> 
                   <h4>Course Name: {item.name}</h4>
