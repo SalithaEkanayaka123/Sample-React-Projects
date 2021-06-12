@@ -35,13 +35,13 @@ const updateVehicles = async (req, res) => {
     let vehicleID = req.params.id;
     if (req.params) {
         if (req.params.id) {
-            const {name, code, passmark, lecture} = req.body;
+            const {name, code, model, type} = req.body;
 
             const updateVehicle = {
                 name,
                 code,
-                passmark,
-                lecture
+                model,
+                type
             }
 
             await Vehicle.findByIdAndUpdate(vehicleID, updateVehicle)
@@ -63,7 +63,7 @@ const getSingleVehicle = async (req, res) => {
         await Vehicle.findById(req.params.id)
             .populate("vehicles", 'code model type name')
             .then(data => {
-                res.status(200).send({ status: "Vehicle Selected" });
+                res.status(200).send({ data: data });
             })
             .catch(error => {
                 res.status(500).send({error: error });

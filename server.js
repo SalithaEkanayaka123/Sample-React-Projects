@@ -53,9 +53,6 @@ app.use("/vehicle", vehicleApi());
 //http://localhost:8070/category
 app.use("/category", categoryApi());
 
-
-
-
 //have to change
 app.route('/').get((req, res) => {
     res.send('Application is running successfully');

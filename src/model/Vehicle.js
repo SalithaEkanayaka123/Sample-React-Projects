@@ -4,7 +4,7 @@ const VehicleSchema = new mongoose.Schema({
     model: { type: String, required: true, trim: true},
     type: { type: String, required: true, trim: true},
     name: { type: String, required: true, trim: true},
-    categories: { type: mongoose.Schema.Types.ObjectId, required: false, ref: 'cattegories'}//have to check
+    categories: [{ type: mongoose.Schema.Types.ObjectId, required: false, ref: 'cattegories'}]//have to check
 })
 
 const Vehicle = mongoose.model('vehicles', VehicleSchema);
