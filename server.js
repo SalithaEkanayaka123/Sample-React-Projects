@@ -1,12 +1,9 @@
 //adding dependencies 
-const express = require("express");
+const express = require("express");//ok
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");//handle body data using json
 const cors = require("cors");
 const dotenv = require("dotenv");
-
-
-
 //have to change
 const vehicleApi = require('./src/Api/VehicleApi');
 const categoryApi = require('./src/Api/CategoryApi');
@@ -14,7 +11,7 @@ const categoryApi = require('./src/Api/CategoryApi');
 
 
 
-const app = express();
+const app = express();//ok
 //declare .env folder
 require("dotenv").config();
 
@@ -56,11 +53,11 @@ app.use("/category", categoryApi());
 //have to change
 app.route('/').get((req, res) => {
     res.send('Application is running successfully');
-});
+});//ok
 
 
 
 //port that listen to the server
-app.listen(PORT, () => {
+app.listen(PORT, () => {//ok
     console.log(`Server is up and running on port ${PORT}`)
 })

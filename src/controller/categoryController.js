@@ -35,9 +35,19 @@ const getVehiclesForCategories = async (req, res) => {
     }
 }
 
+const getTripCharges = async (req, res) => {
+    if(req.body){
+        const Array = req.body;
+        Array.finalValue = Array.finalValue + Array.duration * Array.chargePerRate*Array.vehicleCount;
+        res.status(200).send({data: Array.finalValue });
+
+    }
+
+}
 
 module.exports = {
     createCattegory,
     getAllCattegories,
-    getVehiclesForCategories
+    getVehiclesForCategories,
+    getTripCharges
 };
