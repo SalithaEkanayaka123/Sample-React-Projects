@@ -1,5 +1,4 @@
-import logo from "./logo.svg";
-import "./App.css";
+
 import Navbar from './components/Navbar';
 import AddStudent from './components/AddStudent';
 import DisplayStudent from './components/DisplayStudent';
