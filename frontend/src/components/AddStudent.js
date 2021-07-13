@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import { Form } from 'react-bootstrap';
-import axios from "axios";
+import {useDispatch} from "react-redux";
+import {addStudents} from "../Redux/actions/studentAction";
+
 
 function AddStudent() {
 
@@ -8,7 +10,7 @@ function AddStudent() {
   const [name, setName] = React.useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
-
+  const dispatch = useDispatch();
   function SubmitPressed(e) {
     e.preventDefault();
     const newStudent = {
@@ -17,11 +19,7 @@ function AddStudent() {
       gender
     }
     console.log(newStudent);
-    axios.post("http://localhost:8070/student/add", newStudent).then(() => {
-      alert("Student added");
-    }).catch((err) => {
-      console.log(err);
-    })
+    dispatch(addStudents(newStudent));
   }
     return (
         <div className= "container">
