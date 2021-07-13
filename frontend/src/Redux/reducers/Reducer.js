@@ -1,4 +1,4 @@
-import {FETCH_STUDENTS, ADD_STUDENT} from "../actions/types";
+import {FETCH_STUDENTS, ADD_STUDENT, DELETE_STUDENT, UPDATE_STUDENT} from "../actions/types";
 
 const initialState = {
     StudentDetails: {
@@ -26,6 +26,25 @@ export default function (state = initialState, action){
                     record: action.payload
                 }
             }
+        case DELETE_STUDENT:
+            console.log('reducer');
+            return {
+                ...state,
+                StudentDetails: {
+                    ...state.StudentDetails,
+                    record: state.StudentDetails.records.filter(item => item !== action.payload)
+                }
+            }
+
+        /**
+         * case DELETE_POST:
+         return {
+        ...state,
+        items: state.items.filter(item => item !== action.payload)
+    };
+         */
+        case UPDATE_STUDENT:
+
         default:
             return state;
     }

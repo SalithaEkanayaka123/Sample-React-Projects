@@ -2,8 +2,9 @@ import React, {Component, useEffect, useState} from 'react'
 import {  Link } from 'react-router-dom';
 import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchStudents} from "../Redux/actions/studentAction";
+import {deleteStudents, fetchStudents} from "../Redux/actions/studentAction";
 import URL from "../Redux/URL";
+import { connect } from 'react-redux';
 
 const Student = props =>(
     <tr>
@@ -12,6 +13,8 @@ const Student = props =>(
         <td>{props.student.age}</td>
         <td>{props.student.gender}</td>
         <td>
+            {/*<Link to={"/edit/"+props.student._id}>edit</Link> | <a href="/DisplayStudent" onClick={() => {*/}
+            {/*props.deleteStudent(props.student._id)}}>delete</a>*/}
             <Link to={"/edit/"+props.student._id}>edit</Link> | <a href="/DisplayStudent" onClick={() => {
             props.deleteStudent(props.student._id)}}>delete</a>
         </td>
@@ -23,33 +26,19 @@ function DisplayStudent(){
 
     const dispatch = useDispatch();
     const response = useSelector((state) => state.details.StudentDetails.records);
-    console.log(response);
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {student: []};
-    //
-    // }
 
-    //http://localhost:8070/student
+    console.log(response);
 
     useEffect(() => {
         dispatch(fetchStudents())
     },[])
-    // componentDidMount() {
-    //     axios.get("http://localhost:8070/student/").then(response => {
-    //         this.setState({student: response.data});
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     })
-    // }
-    ///:id
+
     const deleteStudent = (id) => {
-        console.log("i:" +id);
-        document.write("i:" +id)
-        axios.delete(URL.baseURL +'student/delete/'+id)
-            .then(res => console.log(res.data));
-        setStudent(student.filter(el => el._id !== id))
+        dispatch(deleteStudents(id))
     }
+
+
+
     const studentList = () => {
         return response.map(currentstudent => {
             return <Student student = {currentstudent} deleteStudent = {deleteStudent} key ={currentstudent._id}/>;
@@ -74,5 +63,9 @@ function DisplayStudent(){
             </div>
         )
 }
+
+// const deleteStudentState = state => ({
+//     student: state.details.StudentDetails.records
+// });
 
 export default DisplayStudent
