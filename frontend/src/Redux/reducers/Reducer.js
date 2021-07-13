@@ -1,10 +1,11 @@
-import {FETCH_STUDENTS, ADD_STUDENT, DELETE_STUDENT, UPDATE_STUDENT} from "../actions/types";
+import {FETCH_STUDENTS, ADD_STUDENT, DELETE_STUDENT, UPDATE_STUDENT, GET_STUDENT} from "../actions/types";
 
 const initialState = {
     StudentDetails: {
         records: [],
         record: {}
-    }
+    },
+    editDetail: []
 }
 
 export default function (state = initialState, action){
@@ -35,14 +36,12 @@ export default function (state = initialState, action){
                     record: state.StudentDetails.records.filter(item => item !== action.payload)
                 }
             }
+        case GET_STUDENT:
+            return {
+                ...state,
+                editDetail: action.payload
+            }
 
-        /**
-         * case DELETE_POST:
-         return {
-        ...state,
-        items: state.items.filter(item => item !== action.payload)
-    };
-         */
         case UPDATE_STUDENT:
 
         default:

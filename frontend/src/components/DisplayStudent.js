@@ -1,7 +1,8 @@
 import React, {Component, useEffect, useState} from 'react'
-import {  Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteStudents, fetchStudents} from "../Redux/actions/studentAction";
+import {deleteStudents, fetchStudents, getStudentByID} from "../Redux/actions/studentAction";
+import {Button} from "react-bootstrap";
 
 const Student = props =>(
     <tr>
@@ -10,13 +11,15 @@ const Student = props =>(
         <td>{props.student.age}</td>
         <td>{props.student.gender}</td>
         <td>
-            <Link to={"/edit/"+props.student._id}>edit</Link> | <a href="/DisplayStudent" onClick={() => {
+            <Button onClick={() => props.MoveUpdateStudent(props.student._id)} >edit</Button> | <a href="/DisplayStudent" onClick={() => {
             props.deleteStudent(props.student._id)}}>delete</a>
         </td>
     </tr>
 )
-function DisplayStudent(){
 
+
+function DisplayStudent(){
+    const history = useHistory();
     const dispatch = useDispatch();
     const response = useSelector((state) => state.details.StudentDetails.records);
 
@@ -29,11 +32,16 @@ function DisplayStudent(){
         dispatch(deleteStudents(id))
     }
 
+    const MoveUpdateStudent = (id) => {
+        console.log(id)
+        dispatch(getStudentByID(id))
+        history.push('/UpdateStudent/' + id);
+    }
 
 
     const studentList = () => {
         return response.map(currentstudent => {
-            return <Student student = {currentstudent} deleteStudent = {deleteStudent} key ={currentstudent._id}/>;
+            return <Student student = {currentstudent} deleteStudent = {deleteStudent} key ={currentstudent._id} MoveUpdateStudent={MoveUpdateStudent}/>;
         })
     }
         return (

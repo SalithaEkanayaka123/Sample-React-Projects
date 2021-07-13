@@ -1,4 +1,4 @@
-import {FETCH_STUDENTS, ADD_STUDENT, UPDATE_STUDENT, DELETE_STUDENT} from "./types";
+import {FETCH_STUDENTS, ADD_STUDENT, UPDATE_STUDENT, DELETE_STUDENT, GET_STUDENT} from "./types";
 import axios from "axios";
 import URL from '../URL'
 export const fetchStudents = () => dispatch => {
@@ -40,6 +40,21 @@ export const deleteStudents = (id) => dispatch => {
                     payload: id
                 })
                 alert("data deleted sucessfully");
+            }
+
+        ).catch((err) => {
+        console.log(err);
+    })
+}
+
+export const getStudentByID = (id) => dispatch => {
+    console.log('creating');
+    axios.get(URL.baseURL + 'student/get/'+ id)
+        .then(response => {
+                dispatch({
+                    type: GET_STUDENT,
+                    payload: response.data
+                })
             }
 
         ).catch((err) => {
