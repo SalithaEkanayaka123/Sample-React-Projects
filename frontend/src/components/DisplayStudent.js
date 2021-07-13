@@ -1,10 +1,7 @@
 import React, {Component, useEffect, useState} from 'react'
 import {  Link } from 'react-router-dom';
-import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux";
 import {deleteStudents, fetchStudents} from "../Redux/actions/studentAction";
-import URL from "../Redux/URL";
-import { connect } from 'react-redux';
 
 const Student = props =>(
     <tr>
@@ -13,8 +10,6 @@ const Student = props =>(
         <td>{props.student.age}</td>
         <td>{props.student.gender}</td>
         <td>
-            {/*<Link to={"/edit/"+props.student._id}>edit</Link> | <a href="/DisplayStudent" onClick={() => {*/}
-            {/*props.deleteStudent(props.student._id)}}>delete</a>*/}
             <Link to={"/edit/"+props.student._id}>edit</Link> | <a href="/DisplayStudent" onClick={() => {
             props.deleteStudent(props.student._id)}}>delete</a>
         </td>
@@ -22,12 +17,9 @@ const Student = props =>(
 )
 function DisplayStudent(){
 
-    const[student, setStudent] = useState([]);
-
     const dispatch = useDispatch();
     const response = useSelector((state) => state.details.StudentDetails.records);
 
-    console.log(response);
 
     useEffect(() => {
         dispatch(fetchStudents())
@@ -64,8 +56,5 @@ function DisplayStudent(){
         )
 }
 
-// const deleteStudentState = state => ({
-//     student: state.details.StudentDetails.records
-// });
 
 export default DisplayStudent
