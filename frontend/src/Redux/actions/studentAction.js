@@ -47,14 +47,29 @@ export const deleteStudents = (id) => dispatch => {
     })
 }
 
-export const getStudentByID = (id) => dispatch => {
-    console.log('creating');
-    axios.get(URL.baseURL + 'student/get/'+ id)
+export const getStudentByID = (data) => dispatch => {
+    // axios.get(URL.baseURL + 'student/get/'+ id)
+    //     .then(response => {
+    //
+    //         }
+    //
+    //     ).catch((err) => {
+    //     console.log(err);
+    // })
+    dispatch({
+        type: GET_STUDENT,
+        payload: data
+    })
+}
+
+export const upDateStudent = (PostData, id) => dispatch => {
+    axios.put(URL.baseURL + 'student/update/' + id , PostData)
         .then(response => {
                 dispatch({
-                    type: GET_STUDENT,
+                    type: UPDATE_STUDENT,
                     payload: response.data
                 })
+                alert("data updated successfully");
             }
 
         ).catch((err) => {

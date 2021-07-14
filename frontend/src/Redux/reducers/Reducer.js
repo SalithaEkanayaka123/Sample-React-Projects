@@ -43,7 +43,13 @@ export default function (state = initialState, action){
             }
 
         case UPDATE_STUDENT:
-
+            return {
+                ...state,
+                StudentDetails: {
+                    ...state.StudentDetails,
+                    record: action.payload
+                }
+            }
         default:
             return state;
     }

@@ -11,7 +11,7 @@ const Student = props =>(
         <td>{props.student.age}</td>
         <td>{props.student.gender}</td>
         <td>
-            <Button onClick={() => props.MoveUpdateStudent(props.student._id)} >edit</Button> | <a href="/DisplayStudent" onClick={() => {
+            <Button onClick={() => props.MoveUpdateStudent(props.student._id, props.student)} >edit</Button> | <a href="/DisplayStudent" onClick={() => {
             props.deleteStudent(props.student._id)}}>delete</a>
         </td>
     </tr>
@@ -32,9 +32,10 @@ function DisplayStudent(){
         dispatch(deleteStudents(id))
     }
 
-    const MoveUpdateStudent = (id) => {
+    const MoveUpdateStudent = (id, student) => {
+        console.log(student)
         console.log(id)
-        dispatch(getStudentByID(id))
+        dispatch(getStudentByID(student))
         history.push('/UpdateStudent/' + id);
     }
 
